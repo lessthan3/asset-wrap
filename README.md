@@ -6,6 +6,7 @@ Asset-Wrap is a simple asset manager for node.
 3. support snockets to build your javascript
 4. use async whenever possible
 5. support cluster
+6. TODO: watch for file changes
 
 ## Install
 ```
@@ -32,77 +33,99 @@ A group of `Asset`s. Use this if you need a single callback to compile multiple
 assets or if you want your assets served through middleware.
 
 ## Examples
-### Use as Middleware
+### Use as Middleware with ZappaJS
 ```
-wrap = require 'asset-wrap'
-assets = wrap.AssetWrap [
-  new wrap.Stylus {
-    src: "#{__dirname}/path/to/app.styl"
-    dst: '/css/app.css'
-    compress: true
-  }
-  new wrap.Snockets {
-    src: "#{__dirname}/path/to/app.coffee"
-    dst: '/js/app.js'
-    compress: false
-  }
-]
+require('zappajs') ->
+  wrap = require '../lib/index'
+  assets = new wrap.Assets [
+    new wrap.Snockets {
+      src: 'assets/hello.coffee'
+      dst: '/js/hello.js'
+      compress: true
+    }
+    new wrap.Stylus {
+      src: 'assets/hello.styl'
+      dst: '/css/hello.css'
+      compress: true
+    }
+  ]
+  @use assets.middleware
 
-assets.on 'complete', () ->
-  console.log 'assets compiled'
+  @get '/': ->
+    @render index: {
+      assets: assets
+    }
 
-app.configure () ->
-  app.use assets.middleware
-
-@get '/': ->
-  @render index: {
-    assets: assets
-  }
-
-@view index: ->
-  head ->
-    @assets.tag '/css/app.css'
-    @assets.tag '/js/app.js'
-```
-
-### Single Asset Dynamically
-```
-wrap = require '../src/wrap'
-asset = new wrap.Snockets {
-  src: "#{__dirname}/test.coffee"
-  dst: '/js/app.js'
-}
-asset.on 'complete', () ->
-  console.log asset.url
-asset.wrap()
+  @view index: ->
+    head ->
+      text @assets.tag '/css/hello.css'
+      text @assets.tag '/js/hello.js'
+    body ->
+      a href: @assets.url '/css/hello.css', ->
+        'View CSS'
+      pre ->
+        @assets.data '/css/hello.css'
+      a href: @assets.url '/js/hello.js', ->
+        'View Javascript'
+      pre ->
+        @assets.data '/js/hello.js'
 ```
 
-### Single Asset Dynamically Shortcut
+### Generate Asset Dynamically
 ```
-asset = new wrap.Snockets {
-  src: "#{__dirname}/test.coffee"
-  dst: '/js/app.js'
-}, (asset) ->
-  console.log asset.url
+require('zappajs') ->
+  wrap = require '../lib/index'
+
+  @get '/': ->
+    new wrap.Snockets {
+      src: 'assets/hello.coffee'
+      dst: '/js/hello.js'
+      compress: true
+    }, (asset) =>
+      @response.setHeader 'ContentType', asset.type
+      @response.send asset.data
 ```
 
-### Wrap Single Asset with Zappa
+### Generate Asset Dynamically With Cluster
 ```
-@get '/js/app.js': ->
-  new wrap.Snockets {
-    url: '/js/app.js'
-    src: "#{__dirname}/path/to/app.coffee"
-  }, (asset) =>
-    @response.setHeader 'Content-Type', 'text/javascript'
-    @response.write asset.data
+cluster = require 'cluster'
+os      = require 'os'
+
+if cluster.isMaster
+  # Fork workers
+  cluster.fork() for i in os.cpus()
+  cluster.on 'exit', (worker, code, signal) ->
+    console.log "worker #{worker.process.pid} died"
+else
+  # Workers can share any TCP connection
+  require('zappajs') ->
+    wrap = require '../lib/index'
+
+    @get '/js/hello.js': ->
+      new wrap.Snockets {
+        src: 'assets/hello.coffee'
+        dst: '/js/hello.js'
+        compress: true
+      }, (asset) =>
+        @response.setHeader 'ContentType', asset.type
+        @response.send asset.data
+
+    @get '/': ->
+      @render 'index': {layout: no}
+
+    @view index: ->
+      body ->
+        div ->
+          a href: '/js/hello.js', ->
+            'View Javascript'
 ```
 
 # Credit
 Much inspiration from the other asset management tools out there.
-* Brad Carleton's asset-rack
-* Trevor Burnham's connect-assets
-* the Rails Asset Pipeline
-* Mathias Pettersson's connect-assetmanager
+* Brad Carleton's [asset-rack](https://github.com/techpines/asset-rack)
+* Trevor Burnham's [connect-assets](https://github.com/TrevorBurnham/connect-assets)
+* the [Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
+* Mathias Pettersson's [connect-assetmanager](https://github.com/mape/connect-assetmanager)
 
 # License
 ©2013 Bryant Williams under the [MIT license](http://www.opensource.org/licenses/mit-license.php):
