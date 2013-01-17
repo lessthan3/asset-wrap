@@ -1,12 +1,13 @@
 Asset-Wrap is a simple asset manager for node.
 
 ## Goals
-1. build at anytime (server start or on any callback)
-2. support stylus, less, and sass to build your css
-3. support snockets to build your javascript
+1. build at anytime (server start or on any route)
+2. support stylus, less, and sass
+3. support snockets for coffee-script/coffeecup
 4. use async whenever possible
 5. support cluster
-6. TODO: watch for file changes
+6. easily extendible (just add another module)
+7. TODO: watch for file changes
 
 ## Install
 ```
