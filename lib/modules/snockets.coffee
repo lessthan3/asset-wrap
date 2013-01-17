@@ -1,6 +1,6 @@
 path = require('path')
 Snockets = require 'snockets'
-Asset = require('../wrap').Asset
+Asset = require('../asset').Asset
 
 class exports.SnocketsAsset extends Asset
   type: 'text/javascript'

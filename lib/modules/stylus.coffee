@@ -2,7 +2,7 @@ fs = require 'fs'
 path = require 'path'
 nib = require 'nib'
 stylus = require 'stylus'
-Asset = require('../wrap').Asset
+Asset = require('../asset').Asset
 
 class exports.StylusAsset extends Asset
   type: 'text/css'
@@ -14,7 +14,7 @@ class exports.StylusAsset extends Asset
       return @emit 'error', err if err?
       options =
         filename: @src
-        paths: paths.concat[path.dirname(@src)]
+        paths: paths.concat [path.dirname @src]
       stylus(data, options)
         .use(nib)
         .set('compress', compress)

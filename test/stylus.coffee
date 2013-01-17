@@ -1,5 +1,5 @@
 assert = require 'assert'
-wrap = require '../lib/wrap'
+wrap = require '../lib/index'
 
 describe 'Stylus', ->
   it 'should wrap correctly', (done) ->
@@ -22,18 +22,16 @@ describe 'Stylus', ->
     new wrap.Stylus {
       src: "#{__dirname}/assets/hello.styl"
       dst: '/js/app.css'
-      paths: "#{__dirname}/assets"
       compress: true
     }, (asset) ->
-      assert asset.md5, 'd4db8e58738b54a8cf8952ce4214b794'
+      assert.equal asset.md5, 'd4db8e58738b54a8cf8952ce4214b794'
       done()
   it 'should be able to concat', (done) ->
     new wrap.Stylus {
       src: "#{__dirname}/assets/concat.styl"
       dst: '/js/app.css'
-      paths: "#{__dirname}/assets"
       compress: true
     }, (asset) ->
-      assert asset.md5, '2c99b08b9974d9f21d63de82860e280b'
+      assert.equal asset.md5, '2c99b08b9974d9f21d63de82860e280b'
       done()
 

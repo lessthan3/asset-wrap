@@ -24,7 +24,7 @@ describe 'Snockets', ->
       dst: '/js/app.js'
       compress: true
     }, (asset) ->
-      assert asset.md5, '9551f30bcd070f86e9e361ddba928293'
+      assert.equal asset.md5, '9551f30bcd070f86e9e361ddba928293'
       done()
    it 'should be able to concat', (done) ->
     new wrap.Snockets {
@@ -32,6 +32,6 @@ describe 'Snockets', ->
       dst: '/js/app.js'
       compress: true
     }, (asset) ->
-      assert asset.md5, '34133b64b48b4dbddb322915374f819e'
+      assert.equal asset.md5, '34133b64b48b4dbddb322915374f819e'
       done()
      
