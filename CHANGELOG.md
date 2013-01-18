@@ -1,6 +1,7 @@
 **v0.2.1** (in progress)
 
  * ignoreErrors param to wrap.Assets
+ * fix merge for javascript files
 
 **v0.2.0** (2013-01-18 1:00pm EST)
 

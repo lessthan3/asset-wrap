@@ -60,15 +60,20 @@ class exports.Assets extends EventEmitter
   # returns a single asset
   merge: (config={}) ->
     config.src = config.src or uuid.v4()
-    newAsset = new Asset config
-    newAsset.data = ""
+    data = []
+    type = null
     for dst, asset of @dsts
-      newAsset.type ?= asset.type
-      newAsset.data += asset.data
-      if newAsset.type is not asset.type
+      data.push asset.data
+      type ?= asset.type
+      if type is not asset.type
         throw new Error 'mimetypes must match for all assets to merge'
-    newAsset.emit 'complete'
-    return newAsset
+    asset = new Asset config
+    asset.type = type
+    switch type
+      when 'text/javascript' then asset.data = data.join ';'
+      else asset.data = data.join ''
+    asset.emit 'complete'
+    return asset
 
   # Shortcuts
   data: (dst) ->  @dsts[dst].data
