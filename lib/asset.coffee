@@ -20,9 +20,14 @@ class exports.Asset extends EventEmitter
           @tag = "<link type='text/css' rel='stylesheet' href='#{@url}' />"
         else
           @tag = @url
-      callback @ if callback
     super()
-    @wrap() if callback
+    if callback
+      process.nextTick =>
+        @on 'complete', =>
+          callback null
+        @on 'error', (err) =>
+          callback err
+        @wrap()
 
   wrap: ->
     throw new Error 'override me!'

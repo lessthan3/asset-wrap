@@ -1,9 +1,18 @@
-**v0.1.4** (in progress)
+**v0.2.0** (2013-01-18)
+
+ * Breaking changes to shortcuts
+ * Add error handling
+ * Update examples
+ * Use process.nextTick for shortcut callbacks
+ * Use should instead of assert in tests
+ * Add examples for express.js
+
+**v0.1.4** (2013-01-17 9:00pm EST)
 
  * fix stylus nib import
  * add CHANGELOG.md
 
-**v0.1.3** (2013-01-17 7:30pm)
+**v0.1.3** (2013-01-17 7:30pm EST)
 
  * Fix text/css tags
 

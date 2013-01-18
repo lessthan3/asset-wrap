@@ -8,6 +8,7 @@ Asset-Wrap is a simple asset manager for node.
 5. support cluster
 6. easily extendible (just add another module)
 7. TODO: watch for file changes
+8. TODO: ability to serve file from s3 or cloudfiles
 
 ## Install
 ```
@@ -128,7 +129,6 @@ Much inspiration from the other asset management tools out there.
 * Brad Carleton's [asset-rack](https://github.com/techpines/asset-rack)
 * Trevor Burnham's [connect-assets](https://github.com/TrevorBurnham/connect-assets)
 * the [Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
-* Mathias Pettersson's [connect-assetmanager](https://github.com/mape/connect-assetmanager)
 
 # License
 ©2013 Bryant Williams under the [MIT license](http://www.opensource.org/licenses/mit-license.php):

@@ -16,18 +16,19 @@ else
         dst: '/js/hello.js'
         compress: true
       }
-    ]
-    @use assets.middleware
+    ], (err) =>
+      throw err if err
+      @use assets.middleware
 
-    @get '/': ->
-      @render index: {
-        assets: assets
-      }
+      @get '/': ->
+        @render index: {
+          assets: assets
+        }
 
-    @view index: ->
-      body ->
-        a href: @assets.url '/js/hello.js', ->
-          'View Javascript'
-        pre ->
-          @assets.data '/js/hello.js'
+      @view index: ->
+        body ->
+          a href: @assets.url '/js/hello.js', ->
+            'View Javascript'
+          pre ->
+            @assets.data '/js/hello.js'
 

@@ -1,6 +1,6 @@
 wrap = require '../lib/index'
 
-new wrap.Assets [
+assets = new wrap.Assets [
   new wrap.Snockets {
     src: 'assets/hello.coffee'
     compress: true
@@ -9,7 +9,8 @@ new wrap.Assets [
     src: 'assets/goodbye.coffee'
     compress: true
   }
-], (assets) ->
+], (err) ->
+  throw err if err
   asset = assets.merge()
   console.log asset.data
 

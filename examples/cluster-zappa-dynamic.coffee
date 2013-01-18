@@ -12,13 +12,13 @@ else
     wrap = require '../lib/index'
 
     @get '/js/hello.js': ->
-      new wrap.Snockets {
+      asset = new wrap.Snockets {
         src: 'assets/hello.coffee'
-        dst: '/js/hello.js'
         compress: true
-      }, (asset) =>
-        @response.setHeader 'ContentType', asset.type
-        @response.send asset.data
+      }, (err) =>
+        return @res.send 500, err if err
+        @res.setHeader 'Content-Type', asset.type
+        @res.send asset.data
 
     @get '/': ->
       @render 'index': {layout: no}

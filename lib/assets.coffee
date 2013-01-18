@@ -4,20 +4,37 @@ Asset = require('./asset').Asset
 EventEmitter = require('events').EventEmitter
 
 class exports.Assets extends EventEmitter
-  constructor: (assets, callback) ->
+  constructor: ->
+    for arg in arguments
+      if Array.isArray arg
+        @assets = arg
+        continue
+      switch typeof arg
+        when 'function' then callback = arg
+        when 'object' then @options = arg
+
     @dsts = {}
     @urls = {}
-    process.nextTick =>
-      async.forEach assets, (asset, next) =>
-        asset.on 'complete', =>
-          @dsts[asset.dst] = asset
-          @urls[asset.url] = asset
-          next()
-        asset.wrap()
-      , (err) =>
-        return @emit 'error', err if err?
-        @emit 'complete'
-        callback @ if callback?
+    if callback
+      process.nextTick =>
+        @on 'complete', =>
+          callback null
+        @on 'error', (err) =>
+          callback err
+        @wrap()
+
+  wrap: ->
+    async.forEach @assets, (asset, next) =>
+      asset.on 'complete', =>
+        @dsts[asset.dst] = asset
+        @urls[asset.url] = asset
+        next()
+      asset.on 'error', (err) =>
+        @emit 'error', err
+      asset.wrap()
+    , (err) =>
+      return @emit 'error', err if err?
+      @emit 'complete'
 
   # add a middleware hook to serve assets from
   middleware: (req, res, next) =>

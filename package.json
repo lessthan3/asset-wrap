@@ -15,6 +15,7 @@
     "stylus": "0.32.0"
   },
   "devDependencies": {
+    "express": "3.0.6",
     "mocha": "1.8.1",
     "should": "1.2.1",
     "zappajs": "0.4.15"

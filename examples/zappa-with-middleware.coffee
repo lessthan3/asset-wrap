@@ -11,25 +11,26 @@ require('zappajs') ->
       dst: '/css/hello.css'
       compress: true
     }
-  ]
-  @use assets.middleware
+  ], (err) =>
+    throw err if err
+    @use assets.middleware
 
-  @get '/': ->
-    @render index: {
-      assets: assets
-    }
+    @get '/': ->
+      @render index: {
+        assets: assets
+      }
 
-  @view index: ->
-    head ->
-      text @assets.tag '/css/hello.css'
-      text @assets.tag '/js/hello.js'
-    body ->
-      a href: @assets.url '/css/hello.css', ->
-        'View CSS'
-      pre ->
-        @assets.data '/css/hello.css'
-      a href: @assets.url '/js/hello.js', ->
-        'View Javascript'
-      pre ->
-        @assets.data '/js/hello.js'
+    @view index: ->
+      head ->
+        text @assets.tag '/css/hello.css'
+        text @assets.tag '/js/hello.js'
+      body ->
+        a href: @assets.url '/css/hello.css', ->
+          'View CSS'
+        pre ->
+          @assets.data '/css/hello.css'
+        a href: @assets.url '/js/hello.js', ->
+          'View Javascript'
+        pre ->
+          @assets.data '/js/hello.js'
 
