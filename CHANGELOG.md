@@ -1,6 +1,7 @@
 **v0.1.4** (in progress)
 
  * fix stylus nib import
+ * add CHANGELOG.md
 
 **v0.1.3** (2013-01-17 7:30pm)
 
