@@ -6,7 +6,7 @@ class exports.Asset extends EventEmitter
   constructor: (@config, callback) ->
     throw new Error 'must provide config' if not @config?
     @src = @config.src or throw new Error 'must provide src parameter'
-    @dst = @config.dst or throw new Error 'must provide dst parameter'
+    @dst = @config.dst or @src
     @on 'newListener', (event, listener) =>
       listener() if event == 'complete' and @data?
     @on 'complete', =>

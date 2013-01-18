@@ -18,8 +18,10 @@ npm install asset-wrap
 ### Asset
 A wrapped asset, whether using snockets, stylus, sass, or less.
 
-All assets require at a minimum two parameters
+All assets require at a minimum one parameter
 * `src`: the path to your source file
+
+Most of the time you'll always want to include the `dst` parameter. It defaults to `src` if not provided
 * `dst`: the location to serve your file from (with md5 appended). also the cache key
 
 After "wrapping" your asset, it will contain
