@@ -30,7 +30,10 @@ class exports.Assets extends EventEmitter
         @urls[asset.url] = asset
         next()
       asset.on 'error', (err) =>
-        @emit 'error', err
+        if @options.ignoreErrors
+          next()
+        else
+          @emit 'error', err
       asset.wrap()
     , (err) =>
       return @emit 'error', err if err?
