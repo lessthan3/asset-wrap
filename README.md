@@ -22,8 +22,8 @@ A wrapped asset, whether using snockets, stylus, sass, or less.
 All assets require at a minimum one parameter
 * `src`: the path to your source file
 
-Most of the time you'll always want to include the `dst` parameter. It defaults to `src` if not provided
-* `dst`: the location to serve your file from (with md5 appended). also the cache key
+Most of the time you'll always want to include the `dst` parameter. defaults to `src` if not provided
+* `dst`: the location to serve your file from (without the md5 appended yet)
 
 After "wrapping" your asset, it will contain
 * `url`: the dst with the md5 appended
