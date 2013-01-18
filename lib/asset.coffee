@@ -17,7 +17,7 @@ class exports.Asset extends EventEmitter
         when 'text/javascript'
           @tag = "<script type='text/javascript' src='#{@url}'></script>"
         when 'text/css'
-          @tag = "<link ref='stylesheet' href='#{@url}' />"
+          @tag = "<link type='text/css' rel='stylesheet' href='#{@url}' />"
         else
           @tag = @url
       callback @ if callback
