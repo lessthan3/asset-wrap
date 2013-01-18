@@ -40,7 +40,7 @@ assets or if you want your assets served through middleware.
 ### Use as Middleware with ZappaJS
 ```
 require('zappajs') ->
-  wrap = require '../lib/index'
+  wrap = require 'asset-wrap'
   assets = new wrap.Assets [
     new wrap.Snockets {
       src: 'assets/hello.coffee'
@@ -52,42 +52,43 @@ require('zappajs') ->
       dst: '/css/hello.css'
       compress: true
     }
-  ]
-  @use assets.middleware
+  ], (err) =>
+    throw err if err
+    @use assets.middleware
 
-  @get '/': ->
-    @render index: {
-      assets: assets
-    }
+    @get '/': ->
+      @render index: {
+        assets: assets
+      }
 
-  @view index: ->
-    head ->
-      text @assets.tag '/css/hello.css'
-      text @assets.tag '/js/hello.js'
-    body ->
-      a href: @assets.url '/css/hello.css', ->
-        'View CSS'
-      pre ->
-        @assets.data '/css/hello.css'
-      a href: @assets.url '/js/hello.js', ->
-        'View Javascript'
-      pre ->
-        @assets.data '/js/hello.js'
+    @view index: ->
+      head ->
+        text @assets.tag '/css/hello.css'
+        text @assets.tag '/js/hello.js'
+      body ->
+        a href: @assets.url '/css/hello.css', ->
+          'View CSS'
+        pre ->
+          @assets.data '/css/hello.css'
+        a href: @assets.url '/js/hello.js', ->
+          'View Javascript'
+        pre ->
+          @assets.data '/js/hello.js'
 ```
 
-### Generate Asset Dynamically
+### Generate Asset Dynamically in ZappaJS
 ```
 require('zappajs') ->
-  wrap = require '../lib/index'
+  wrap = require 'asset-wrap'
 
   @get '/': ->
-    new wrap.Snockets {
+    asset = new wrap.Snockets {
       src: 'assets/hello.coffee'
-      dst: '/js/hello.js'
       compress: true
-    }, (asset) =>
-      @response.setHeader 'ContentType', asset.type
-      @response.send asset.data
+    }, (err) =>
+      @res.send 500, err if err
+      @res.setHeader 'ContentType', asset.type
+      @res.send asset.data
 ```
 
 ### Generate Asset Dynamically With Cluster
@@ -103,16 +104,17 @@ if cluster.isMaster
 else
   # Workers can share any TCP connection
   require('zappajs') ->
-    wrap = require '../lib/index'
+    wrap = require 'asset-wrap'
 
     @get '/js/hello.js': ->
-      new wrap.Snockets {
+      asset = new wrap.Snockets {
         src: 'assets/hello.coffee'
         dst: '/js/hello.js'
         compress: true
-      }, (asset) =>
-        @response.setHeader 'ContentType', asset.type
-        @response.send asset.data
+      }, (err) =>
+        @res.send 500, err if err
+        @res.setHeader 'ContentType', asset.type
+        @res.send asset.data
 
     @get '/': ->
       @render 'index': {layout: no}
