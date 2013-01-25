@@ -9,6 +9,7 @@ class exports.SnocketsAsset extends Asset
 
     snockets = new Snockets()
     snockets.getConcatenation @src, {
+      async: false
       minify: compress
     }, (err, js) =>
       return @emit 'error', err if err?
