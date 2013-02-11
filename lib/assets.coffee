@@ -13,6 +13,10 @@ class exports.Assets extends EventEmitter
         when 'function' then callback = arg
         when 'object' then @options = arg
 
+    for asset in @assets
+      for k, v of @options
+        asset.config[k] ?= v
+      
     @dsts = {}
     @urls = {}
     if callback
@@ -43,7 +47,8 @@ class exports.Assets extends EventEmitter
   middleware: (req, res, next) =>
     asset = @urls[req.url]
     return next() unless asset?
-    res.header 'Content-Type', asset.type
+    res.set 'Cache-Control', asset.cache
+    res.set 'Content-Type', asset.type
     res.send asset.data
 
   # push assets to a cdn

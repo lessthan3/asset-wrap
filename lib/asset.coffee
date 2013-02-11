@@ -20,6 +20,10 @@ class exports.Asset extends EventEmitter
           @tag = "<link type='text/css' rel='stylesheet' href='#{@url}' />"
         else
           @tag = @url
+      if @config.cache
+        @cache = "public, max-age=#{@config.cache}, must-revalidate"
+      else
+        @cache = "private, max-age=0, no-cache, no-store, must-revalidate"
     super()
     if callback
       process.nextTick =>
