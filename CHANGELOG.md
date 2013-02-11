@@ -1,7 +1,13 @@
-**v0.2.1** (in progress)
+**v0.2.2** (in progress)
+
+ * 
+
+**v0.2.1** (2013-02-11)
 
  * ignoreErrors param to wrap.Assets
- * fix merge for javascript files
+ * fix merge for javascript files that are missing semicolons
+ * add custom Cache-Control setting to middleware
+ * add default config values for Assets
 
 **v0.2.0** (2013-01-18 1:00pm EST)
 
