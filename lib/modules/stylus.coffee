@@ -1,3 +1,4 @@
+cleancss = require 'clean-css'
 fs = require 'fs'
 path = require 'path'
 nib = require 'nib'
@@ -21,5 +22,6 @@ class exports.StylusAsset extends Asset
         .set('include css', true)
         .render (err, css) =>
           return @emit 'error', err if err?
+          css = cleancss.process css if compress
           @data = css
           @emit 'complete'
