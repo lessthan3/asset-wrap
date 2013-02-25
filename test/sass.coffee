@@ -14,7 +14,7 @@ describe 'Sass', ->
   it 'should wrap correctly', (done) ->
     asset = new wrap.Sass {
       src: "#{__dirname}/assets/hello.sass"
-    }, (err, asset) ->
+    }, (err) ->
       asset.md5.should.equal '2228e977ebea8966e27929f43e39cb67'
       done()
 

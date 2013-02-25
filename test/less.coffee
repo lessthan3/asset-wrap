@@ -14,26 +14,26 @@ describe 'Less', ->
   it 'should wrap correctly', (done) ->
     asset = new wrap.Less {
       src: "#{__dirname}/assets/hello.less"
-    }, (err, asset) ->
+    }, (err) ->
       asset.md5.should.equal '9568dd9e0d5b126af4fb9f7505b10934'
       done()
   it 'should wrap on callback', (done) ->
-    new wrap.Less {
+    asset = new wrap.Less {
       src: "#{__dirname}/assets/hello.less"
-    }, (err, asset) ->
+    }, (err) ->
       asset.md5.should.equal '9568dd9e0d5b126af4fb9f7505b10934'
       done()
   it 'should be able to compress', (done) ->
-    new wrap.Less {
+    asset = new wrap.Less {
       src: "#{__dirname}/assets/hello.less"
       compress: true
-    }, (err, asset) ->
+    }, (err) ->
       asset.md5.should.equal '1f1654586705c11ce56755318b715379'
       done()
   it 'should be able to concat', (done) ->
-    new wrap.Less {
+    asset = new wrap.Less {
       src: "#{__dirname}/assets/concat.less"
-    }, (err, asset) ->
+    }, (err) ->
       asset.md5.should.equal '2a038c4cf40546c4f232ed8a17348ff5'
       done()
 
