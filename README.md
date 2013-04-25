@@ -1,13 +1,13 @@
 Asset-Wrap is a simple asset manager for node.
 
 ## Goals
-1. build at anytime (server start or on any route)
+1. build at anytime (server start and middlewareor on dynamically on any route)
 2. support stylus, less, and sass
 3. support snockets for coffee-script/coffeecup
 4. use async whenever possible
 5. support cluster
 6. easily extendible (just add another module)
-7. TODO: watch for file changes
+7. watch for file changes
 8. TODO: ability to serve file from s3 or cloudfiles
 
 ## Install
@@ -45,14 +45,15 @@ require('zappajs') ->
     new wrap.Snockets {
       src: 'assets/hello.coffee'
       dst: '/js/hello.js'
-      compress: true
     }
     new wrap.Stylus {
       src: 'assets/hello.styl'
       dst: '/css/hello.css'
-      compress: true
     }
-  ], (err) =>
+  ], {
+    compress: true
+    watch: true
+  }, (err) =>
     throw err if err
     @use assets.middleware
 
