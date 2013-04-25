@@ -30,11 +30,19 @@ describe 'Snockets', ->
     }, (err) ->
       asset.md5.should.equal '9551f30bcd070f86e9e361ddba928293'
       done()
-   it 'should be able to concat', (done) ->
+  it 'should be able to concat', (done) ->
     asset = new wrap.Snockets {
       src: "#{__dirname}/assets/concat.coffee"
       compress: true
     }, (err) ->
       asset.md5.should.equal '34133b64b48b4dbddb322915374f819e'
+      done()
+  it 'should be able to watch', (done) ->
+    asset = new wrap.Snockets {
+      src: "#{__dirname}/assets/hello.coffee"
+      compress: true
+      watch: true
+    }, (err) ->
+      asset.md5.should.equal '9551f30bcd070f86e9e361ddba928293'
       done()
      

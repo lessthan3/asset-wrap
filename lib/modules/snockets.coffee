@@ -1,3 +1,4 @@
+chokidar = require 'chokidar'
 path = require('path')
 Snockets = require 'snockets'
 Asset = require('../asset').Asset

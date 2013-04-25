@@ -1,4 +1,9 @@
-**v0.2.2** (2013-04-25)
+**v0.2.3** (2013-04-25 3:03 PM EDT)
+
+ * fix import for chokidar in snockets
+ * add snockets test for watch
+
+**v0.2.2** (2013-04-25 2:57 PM EDT)
 
  * add cleancss option for stylus to concat imported css
  * add file watching for @src file in all modules
