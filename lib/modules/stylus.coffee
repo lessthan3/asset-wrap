@@ -6,8 +6,9 @@ stylus = require 'stylus'
 Asset = require('../asset').Asset
 
 class exports.StylusAsset extends Asset
+  name: 'stylus'
   type: 'text/css'
-  wrap: ->
+  compile: ->
     compress = @config.compress or false
     paths = @config.paths or []
 
@@ -22,6 +23,6 @@ class exports.StylusAsset extends Asset
         .set('include css', true)
         .render (err, css) =>
           return @emit 'error', err if err?
-          css = cleancss.process css if compress
+          css = cleancss.process css if @config.cleancss
           @data = css
           @emit 'complete'

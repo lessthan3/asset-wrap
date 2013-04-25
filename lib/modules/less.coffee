@@ -4,8 +4,9 @@ path = require 'path'
 Asset = require('../asset').Asset
 
 class exports.LessAsset extends Asset
+  name: 'less'
   type: 'text/css'
-  wrap: ->
+  compile: ->
     compress = @config.compress or false
     paths = @config.paths or []
 

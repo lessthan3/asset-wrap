@@ -26,6 +26,7 @@ describe 'Stylus', ->
     asset = new wrap.Stylus {
       src: "#{__dirname}/assets/hello.styl"
       compress: true
+      cleancss: true
     }, (err) ->
       asset.md5.should.equal 'b53eac41377b9ee809fd1c83e903017b'
       done()
@@ -33,6 +34,7 @@ describe 'Stylus', ->
     asset = new wrap.Stylus {
       src: "#{__dirname}/assets/concat.styl"
       compress: true
+      cleancss: true
     }, (err) ->
       asset.md5.should.equal '5b4bb8f2ea7b82a3f0c16a09ad7b8656'
       done()

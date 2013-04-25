@@ -1,6 +1,8 @@
-**v0.2.2** (in progress)
+**v0.2.2** (2013-04-25)
 
- * 
+ * add cleancss option for stylus to concat imported css
+ * add file watching for @src file in all modules
+ * add file watching for @src and all dependencies in snockets module
 
 **v0.2.1** (2013-02-11)
 

@@ -3,15 +3,23 @@ Snockets = require 'snockets'
 Asset = require('../asset').Asset
 
 class exports.SnocketsAsset extends Asset
+  name: 'snockets'
   type: 'text/javascript'
-  wrap: ->
-    compress = @config.compress or false
-
-    snockets = new Snockets()
-    snockets.getConcatenation @src, {
+  constructor: (@config, callback) ->
+    super @config, callback
+    @snockets = new Snockets()
+  compile: ->
+    @snockets.getConcatenation @src, {
       async: false
-      minify: compress
+      minify: @config.compress or false
     }, (err, js) =>
       return @emit 'error', err if err?
       @data = js
       @emit 'complete'
+  watch: ->
+    @snockets.scan @src, (err, graph) =>
+      for file in graph.getChain @src
+        watcher = chokidar.watch file, {ignored: /^\./, persistent: false}
+        watcher.on 'change', (path, stats) =>
+          console.log "asset.wrap[snockets] file changed: #{path}"
+          @compile()

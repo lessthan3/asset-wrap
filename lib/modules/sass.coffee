@@ -5,11 +5,9 @@ sass = require 'sass'
 Asset = require('../asset').Asset
 
 class exports.SassAsset extends Asset
+  name: 'sass'
   type: 'text/css'
-  wrap: ->
-    compress = @config.compress or false
-    paths = @config.paths or []
-
+  compile: ->
     fs.readFile @src, 'utf8', (err, data) =>
       return @emit 'error', err if err?
       @data = sass.render data
