@@ -3,6 +3,8 @@
  * add cleancss option for stylus to concat imported css
  * add file watching for @src file in all modules
  * add file watching for @src and all dependencies in snockets module
+ * update stylus to 0.32.1
+ * add `define('url', stylus.url())` to stylus module
 
 **v0.2.1** (2013-02-11)
 

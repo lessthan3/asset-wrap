@@ -47,8 +47,13 @@ describe 'Stylus', ->
   it 'should throw a file not found error', (done) ->
     asset = new wrap.Stylus {
       src: "#{__dirname}/assets/not-a-file.styl"
-    }, (err, asset) ->
+    }, (err) ->
       err.errno.should.equal 34
       done()
-
+  it 'should allow both types of imports', (done) ->
+    asset = new wrap.Stylus {
+      src: "#{__dirname}/assets/url.styl"
+    }, (err) ->
+      asset.md5.should.equal 'b74e2dc4a4fdfb404814db2c11b6e744'
+      done()
 

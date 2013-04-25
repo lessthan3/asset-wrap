@@ -19,6 +19,7 @@ class exports.StylusAsset extends Asset
         paths: paths.concat [path.dirname @src]
       stylus(data, options)
         .use(nib())
+        .define('url', stylus.url())
         .set('compress', compress)
         .set('include css', true)
         .render (err, css) =>
