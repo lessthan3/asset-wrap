@@ -3,7 +3,15 @@
   "description": "Asset management framework for nodejs",
   "version": "0.2.3",
   "author": "Bryant Williams <b.n.williams@gmail.com>",
-  "repository": {"type": "git", "url": "git://github.com/scien/asset-wrap.git"},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scien/asset-wrap.git"
+  },
+  "scripts": {
+    "start":    "cake start",
+    "stop":     "cake stop",
+    "test":     "cake test"
+  },
   "dependencies": {
     "async": "0.1.22",
     "clean-css": "0.10.1",

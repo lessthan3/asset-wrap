@@ -1,3 +1,7 @@
+**v0.2.4** (in progress)
+
+ * add Travis CI
+
 **v0.2.3** (2013-04-25 3:03 PM EDT)
 
  * fix import for chokidar in snockets
