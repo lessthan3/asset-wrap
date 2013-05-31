@@ -1,4 +1,6 @@
-**v0.2.4** (in progress)
+**v0.3.1** (in progress)
+
+**v0.3.0** (2013-05-31 5:53 PM EDT)
 
  * add Travis CI
  * separate compiled and complete events
