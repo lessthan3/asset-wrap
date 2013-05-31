@@ -8,7 +8,7 @@ Asset-Wrap is a simple asset manager for node.
 5. support cluster
 6. easily extendible (just add another module)
 7. watch for file changes
-8. TODO: ability to serve file from s3 or cloudfiles
+8. serve files from s3 or cloudfiles or azure
 
 ## Install
 ```

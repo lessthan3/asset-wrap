@@ -6,6 +6,7 @@ stylus = require 'stylus'
 Asset = require('../asset').Asset
 
 class exports.StylusAsset extends Asset
+  ext: 'css'
   name: 'stylus'
   type: 'text/css'
   compile: ->
@@ -26,4 +27,4 @@ class exports.StylusAsset extends Asset
           return @emit 'error', err if err?
           css = cleancss.process css if @config.cleancss
           @data = css
-          @emit 'complete'
+          @emit 'compiled'

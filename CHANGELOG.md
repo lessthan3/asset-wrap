@@ -1,6 +1,10 @@
 **v0.2.4** (in progress)
 
  * add Travis CI
+ * separate compiled and complete events
+ * add push to cdn
+ * push to cdn after compile, but before complete
+ * add callback to merge() in case asset needs to go to cdn
 
 **v0.2.3** (2013-04-25 3:03 PM EDT)
 

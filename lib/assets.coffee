@@ -5,6 +5,7 @@ EventEmitter = require('events').EventEmitter
 
 class exports.Assets extends EventEmitter
   constructor: ->
+    @options = {}
     for arg in arguments
       if Array.isArray arg
         @assets = arg
@@ -51,34 +52,28 @@ class exports.Assets extends EventEmitter
     res.set 'Content-Type', asset.type
     res.send asset.data
 
-  # push assets to a cdn
-  push: (host, config, next) ->
-    switch host
-      when 's3'
-        console.log 's3'
-        next()
-      when 'cloudfiles'
-        console.log 'cloudfiles'
-        next()
-
   # merge all asset data. should only be used if all assets have same mimetype
   # returns a single asset
-  merge: (config={}) ->
-    config.src = config.src or uuid.v4()
+  merge: (next) ->
+    @options.src = uuid.v4()
     data = []
+    ext = null
     type = null
     for dst, asset of @dsts
       data.push asset.data
       type ?= asset.type
+      ext ?= asset.ext
       if type is not asset.type
         throw new Error 'mimetypes must match for all assets to merge'
-    asset = new Asset config
+    asset = new Asset @options
     asset.type = type
+    asset.ext = ext
     switch type
       when 'text/javascript' then asset.data = data.join ';'
       else asset.data = data.join ''
-    asset.emit 'complete'
-    return asset
+    asset.on 'complete', next
+    asset.emit 'compiled'
+    asset
 
   # Shortcuts
   data: (dst) ->  @dsts[dst].data

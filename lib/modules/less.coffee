@@ -4,6 +4,7 @@ path = require 'path'
 Asset = require('../asset').Asset
 
 class exports.LessAsset extends Asset
+  ext: 'css'
   name: 'less'
   type: 'text/css'
   compile: ->
@@ -21,5 +22,5 @@ class exports.LessAsset extends Asset
       parser.parse data, (err, tree) =>
         return @emit 'error', err if err?
         @data = tree.toCSS compress: compress
-        @emit 'complete'
+        @emit 'compiled'
 

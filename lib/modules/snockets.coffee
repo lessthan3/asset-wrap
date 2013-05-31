@@ -4,6 +4,7 @@ Snockets = require 'snockets'
 Asset = require('../asset').Asset
 
 class exports.SnocketsAsset extends Asset
+  ext: 'js'
   name: 'snockets'
   type: 'text/javascript'
   constructor: (@config, callback) ->
@@ -16,7 +17,7 @@ class exports.SnocketsAsset extends Asset
     }, (err, js) =>
       return @emit 'error', err if err?
       @data = js
-      @emit 'complete'
+      @emit 'compiled'
   watch: ->
     @snockets.scan @src, (err, graph) =>
       for file in graph.getChain @src
