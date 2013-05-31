@@ -1,40 +1,84 @@
 Asset-Wrap is a simple asset manager for node.
 
 ## Goals
-1. build at anytime (server start and middlewareor on dynamically on any route)
-2. support stylus, less, and sass
-3. support snockets for coffee-script/coffeecup
+1. build anytime (middleware or dynamically)
+2. css: support stylus, less, and sass
+3. js: support coffee-script
 4. use async whenever possible
 5. support cluster
-6. easily extendible (just add another module)
+6. easily extendible
 7. watch for file changes
 8. serve files from s3 or cloudfiles or azure
 
 ## Install
-```
+```bash
 npm install asset-wrap
 ```
 
-## Details
-### Asset
-A wrapped asset, whether using snockets, stylus, sass, or less.
+## Asset
+An asset representing a css or js file
 
-All assets require at a minimum one parameter
+```
+asset = new wrap.Asset {
+  src: '/js/app.js'
+}
+```
+
+### Options
+* `cache`: maxAge to set cache headers
 * `src`: the path to your source file
-
-Most of the time you'll always want to include the `dst` parameter. defaults to `src` if not provided
-* `dst`: the location to serve your file from (without the md5 appended yet)
-
-After "wrapping" your asset, it will contain
+* `dst`: the location to serve your file from (without the md5 appended)
 * `url`: the dst with the md5 appended
-* `data`: the wrapped content
+* `cdn`: cdn information to push assets to
+* `data`: the content
 * `ext`: the file extension of the wrapped asset
 * `md5`: the md5 of the wrapped content
 * `tag`: the full html tag to render
 
-### Assets
-A group of `Asset`s. Use this if you need a single callback to compile multiple
-assets or if you want your assets served through middleware.
+### Events
+* `complete`: Emitted after asset has content, headers, url, etc. 
+* `compiled`: Emitted once asset.data is compiled
+* `error`: Emitted if there is an error compiling the asset
+
+### Creating a Custom Asset
+```
+class MyAsset extends wrap.Asset
+  ext: 'txt'
+  name: 'my-asset'
+  type: 'text/plain'
+  compile: ->
+    @data = 'hello world'
+    @emit 'compiled'
+
+```
+## Assets
+A group of `Asset`s. Use when you're compiling multiple assets or for middleware
+
+```
+assets = new wrap.Assets [
+  new wrap.Snockets {
+    src: 'assets/hello.coffee'
+  }
+  new wrap.Stylus {
+    src: 'assets/hello.styl'
+  }
+], {
+  compress: true
+  watch: true
+}, (err) =>
+  throw err if err
+```
+
+### Options
+Options are the exact same as an asset. Any options given here are passed
+down to each asset.
+
+## Asset Types
+* SnocketsAsset
+* LessAsset
+* StylusAsset
+* SassAsset
+
 
 ## Examples
 ### Use as Middleware with ZappaJS
