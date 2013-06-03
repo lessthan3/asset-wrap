@@ -35,7 +35,7 @@ class exports.Asset extends EventEmitter
     @url = "#{@dst[0...@dst.length-path.extname(@dst).length]}-#{@md5}.#{@ext}"
 
     # tag for html templates
-    @url = "#{config.cname}/#{@url}"
+    @updateTag()
 
     # cache headers
     if @config.cache
