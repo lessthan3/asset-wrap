@@ -35,13 +35,7 @@ class exports.Asset extends EventEmitter
     @url = "#{@dst[0...@dst.length-path.extname(@dst).length]}-#{@md5}.#{@ext}"
 
     # tag for html templates
-    switch @type
-      when 'text/javascript'
-        @tag = "<script type='text/javascript' src='#{@url}'></script>"
-      when 'text/css'
-        @tag = "<link type='text/css' rel='stylesheet' href='#{@url}' />"
-      else
-        @tag = @url
+    @url = "#{config.cname}/#{@url}"
 
     # cache headers
     if @config.cache
@@ -70,7 +64,17 @@ class exports.Asset extends EventEmitter
         remote: @url
       }, =>
         @url = "#{config.cname}/#{@url}"
+        @updateTag()
         next()
+
+  updateTag: ->
+    switch @type
+      when 'text/javascript'
+        @tag = "<script type='text/javascript' src='#{@url}'></script>"
+      when 'text/css'
+        @tag = "<link type='text/css' rel='stylesheet' href='#{@url}' />"
+      else
+        @tag = @url
 
   # watch this asset for any changes
   watch: ->

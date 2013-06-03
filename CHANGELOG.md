@@ -1,6 +1,9 @@
-**v0.3.1** (in progress)
+**v0.3.2** (in progress)
+
+**v0.3.1** (2013-06-03 4:47 AM EDT)
 
  * fix merge callback
+ * update asset.tag when deploying to cdn
 
 **v0.3.0** (2013-05-31 5:53 PM EDT)
 
