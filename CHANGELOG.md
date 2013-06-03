@@ -1,5 +1,7 @@
 **v0.3.1** (in progress)
 
+ * fix merge callback
+
 **v0.3.0** (2013-05-31 5:53 PM EDT)
 
  * add Travis CI
