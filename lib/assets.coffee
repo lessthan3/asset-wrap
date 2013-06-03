@@ -71,8 +71,10 @@ class exports.Assets extends EventEmitter
     switch type
       when 'text/javascript' then asset.data = data.join ';'
       else asset.data = data.join ''
+    asset.on 'error', next
     asset.on 'complete', next
-    asset.emit 'compiled'
+    process.nextTick ->
+      asset.emit 'compiled'
     asset
 
   # Shortcuts
