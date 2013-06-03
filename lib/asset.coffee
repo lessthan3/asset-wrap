@@ -63,7 +63,7 @@ class exports.Asset extends EventEmitter
         container: container
         remote: @url
       }, =>
-        @url = "#{config.cname}/#{@url}"
+        @url = "#{config.cname}#{@url}"
         @updateTag()
         next()
 
