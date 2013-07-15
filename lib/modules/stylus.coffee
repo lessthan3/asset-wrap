@@ -18,12 +18,13 @@ class exports.StylusAsset extends Asset
       options =
         filename: @src
         paths: paths.concat [path.dirname @src]
-      stylus(data, options)
+      s = stylus(data, options)
         .use(nib())
         .define('url', stylus.url())
         .set('compress', compress)
         .set('include css', true)
-        .render (err, css) =>
+      s.define(k, v) for k, v of @config.vars if @config.vars
+      s.render (err, css) =>
           return @emit 'error', err if err?
           css = cleancss.process css if @config.cleancss
           @data = css

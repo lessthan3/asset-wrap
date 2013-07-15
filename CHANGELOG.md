@@ -1,5 +1,7 @@
 **v0.3.4** (in progress)
 
+ * add global variables for stylus
+
 **v0.3.3** (2013-06-03 4:59 AM EDT)
 
   * typo
