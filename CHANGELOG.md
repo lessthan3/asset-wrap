@@ -1,4 +1,4 @@
-**v0.3.4** (in progress)
+**v0.3.4** (2013-08-06)
 
  * add global variables for stylus
 
