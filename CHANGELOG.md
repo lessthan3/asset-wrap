@@ -1,3 +1,9 @@
+**v0.3.5** (2013-10-04)
+
+ * parse stylus global variables as the correct node type
+ * allow prefix on stylus global variables (ex: $, or var_)
+ * not removing old variable setting yet, will bump minor version for that
+
 **v0.3.4** (2013-08-06)
 
  * add global variables for stylus

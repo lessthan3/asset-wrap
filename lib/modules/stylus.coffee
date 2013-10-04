@@ -24,8 +24,51 @@ class exports.StylusAsset extends Asset
         .set('compress', compress)
         .set('include css', true)
       s.define(k, v) for k, v of @config.vars if @config.vars
+      @parseVariables s, @config.vars, @config.vars_prefix
       s.render (err, css) =>
           return @emit 'error', err if err?
           css = cleancss.process css if @config.cleancss
           @data = css
           @emit 'compiled'
+
+  parseVariables: (s, vars, vars_prefix="") ->
+    parseColors = (colors) ->
+      parse = (hex) ->
+        hex = "#{hex}#{hex}" if hex.length == 1
+        parseInt hex, 16
+
+      rgba = [0, 0, 0, 255]
+      rgba[index] = parse color for index, color of colors
+      new stylus.nodes.RGBA rgba[0], rgba[1], rgba[2], rgba[3]
+
+    for k, v of vars
+      if vars_prefix
+       k = "#{vars_prefix}#{k}"
+
+      # boolean
+      if v in ['true', 'false']
+        s.define k, new stylus.nodes.Boolean v
+
+      # shorthand rgb
+      else if /^#(?:([0-9a-fA-F]){3})$/.test v
+        rgb = v.match /^#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])$/
+        s.define k, parseColors rgb[1..3]
+
+      # shorthand rgba
+      else if /^#(?:([0-9a-fA-F]){4})$/.test v
+        rgba = v.match /^#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])$/
+        s.define k, parseColors rgb[1..4]
+
+      # rgb
+      else if /^#(?:([0-9a-fA-F]){6})$/.test v
+        rgb = v.match /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+        s.define k, parseColors rgb[1..3]
+
+      # rgba
+      else if /^#(?:([0-9a-fA-F]){8})$/.test v
+        rgb = v.match /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+        s.define k, parseColors rgb[1..4]
+
+      # literal
+      else
+        s.define k, new stylus.nodes.Literal v

@@ -56,4 +56,13 @@ describe 'Stylus', ->
     }, (err) ->
       asset.md5.should.equal 'b74e2dc4a4fdfb404814db2c11b6e744'
       done()
+  it 'should work with variables', (done) ->
+    asset = new wrap.Stylus {
+      src: "#{__dirname}/assets/vars.styl"
+      vars:
+        my_color: '#123456'
+      vars_prefix: '$'
+    }, (err) ->
+      asset.md5.should.equal '127c6734f377bdc62d1ae376e437d0fd'
+      done()
 
