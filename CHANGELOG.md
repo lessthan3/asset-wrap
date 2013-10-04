@@ -1,3 +1,7 @@
+**v0.4.0** (2013-10-04)
+
+ * remove old stylus variable setting
+
 **v0.3.5** (2013-10-04)
 
  * parse stylus global variables as the correct node type

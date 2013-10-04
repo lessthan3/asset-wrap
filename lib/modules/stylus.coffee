@@ -23,7 +23,6 @@ class exports.StylusAsset extends Asset
         .define('url', stylus.url())
         .set('compress', compress)
         .set('include css', true)
-      s.define(k, v) for k, v of @config.vars if @config.vars
       @parseVariables s, @config.vars, @config.vars_prefix
       s.render (err, css) =>
           return @emit 'error', err if err?
