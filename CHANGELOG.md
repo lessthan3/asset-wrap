@@ -1,3 +1,7 @@
+**v0.4.1** (2013-10-06)
+
+ * fix opacity for rgba colors for stylus variables
+
 **v0.4.0** (2013-10-04)
 
  * remove old stylus variable setting

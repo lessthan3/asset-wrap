@@ -38,7 +38,7 @@ class exports.StylusAsset extends Asset
 
       rgba = [0, 0, 0, 255]
       rgba[index] = parse color for index, color of colors
-      new stylus.nodes.RGBA rgba[0], rgba[1], rgba[2], rgba[3]
+      new stylus.nodes.RGBA rgba[0], rgba[1], rgba[2], rgba[3]/255
 
     for k, v of vars
       if vars_prefix
@@ -65,8 +65,8 @@ class exports.StylusAsset extends Asset
 
       # rgba
       else if /^#(?:([0-9a-fA-F]){8})$/.test v
-        rgb = v.match /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
-        s.define k, parseColors rgb[1..4]
+        rgba = v.match /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+        s.define k, parseColors rgba[1..4]
 
       # literal
       else
