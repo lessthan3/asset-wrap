@@ -1,3 +1,7 @@
+**v0.4.2** (2013-10-23)
+
+ * fix stylus boolean variables when false
+
 **v0.4.1** (2013-10-06)
 
  * fix opacity for rgba colors for stylus variables

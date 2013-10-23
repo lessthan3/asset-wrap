@@ -46,7 +46,7 @@ class exports.StylusAsset extends Asset
 
       # boolean
       if v in ['true', 'false']
-        s.define k, new stylus.nodes.Boolean v
+        s.define k, new stylus.nodes.Boolean v is 'true'
 
       # shorthand rgb
       else if /^#(?:([0-9a-fA-F]){3})$/.test v
