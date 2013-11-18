@@ -59,7 +59,9 @@ class exports.Assets extends EventEmitter
     data = []
     ext = null
     type = null
-    for dst, asset of @dsts
+
+    for asset in @assets
+      continue unless @dsts[asset.dst]
       data.push asset.data
       type ?= asset.type
       ext ?= asset.ext

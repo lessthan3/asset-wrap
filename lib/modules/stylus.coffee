@@ -1,9 +1,9 @@
-cleancss = require 'clean-css'
 fs = require 'fs'
 path = require 'path'
 nib = require 'nib'
 stylus = require 'stylus'
 Asset = require('../asset').Asset
+CleanCSS = require 'clean-css'
 
 class exports.StylusAsset extends Asset
   ext: 'css'
@@ -26,7 +26,8 @@ class exports.StylusAsset extends Asset
       @parseVariables s, @config.vars, @config.vars_prefix
       s.render (err, css) =>
           return @emit 'error', err if err?
-          css = cleancss.process css if @config.cleancss
+          if @config.cleancss
+            css = new CleanCSS({}).minify css
           @data = css
           @emit 'compiled'
 
