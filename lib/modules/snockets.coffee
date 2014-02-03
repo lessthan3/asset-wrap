@@ -1,8 +1,11 @@
+
+# dependencies
 chokidar = require 'chokidar'
 path = require('path')
 Snockets = require 'snockets'
 Asset = require('../asset').Asset
 
+# asset
 class exports.SnocketsAsset extends Asset
   ext: 'js'
   name: 'snockets'

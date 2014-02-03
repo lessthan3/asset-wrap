@@ -1,11 +1,13 @@
+
+# dependencies
 chokidar = require 'chokidar'
 crypto = require 'crypto'
 path = require 'path'
 pkgcloud = require 'pkgcloud'
 utils = require './utils'
-
 EventEmitter = require('events').EventEmitter
 
+# base Asset class
 class exports.Asset extends EventEmitter
   name: 'asset'
   ext: ''

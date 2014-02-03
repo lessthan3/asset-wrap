@@ -1,8 +1,11 @@
+
+# dependencies
 async = require 'async'
 uuid = require 'node-uuid'
 Asset = require('./asset').Asset
 EventEmitter = require('events').EventEmitter
 
+# multiple assets wrapper
 class exports.Assets extends EventEmitter
   constructor: ->
     @options = {}

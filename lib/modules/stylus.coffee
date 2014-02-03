@@ -1,3 +1,5 @@
+
+# dependencies
 fs = require 'fs'
 path = require 'path'
 nib = require 'nib'
@@ -5,6 +7,7 @@ stylus = require 'stylus'
 Asset = require('../asset').Asset
 CleanCSS = require 'clean-css'
 
+# asset
 class exports.StylusAsset extends Asset
   ext: 'css'
   name: 'stylus'

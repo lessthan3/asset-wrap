@@ -1,3 +1,7 @@
+**v0.5.1** (2014-02-01)
+
+ - add a CSS module
+
 **v0.5.0** (2013-11-18)
 
  - update dependencies to pull in various bug fixes

@@ -1,9 +1,12 @@
+
+# dependencies
 fs = require 'fs'
 path = require 'path'
 nib = require 'nib'
 sass = require 'sass'
 Asset = require('../asset').Asset
 
+# asset
 class exports.SassAsset extends Asset
   ext: 'css'
   name: 'sass'

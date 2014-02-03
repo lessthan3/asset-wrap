@@ -1,8 +1,11 @@
+
+# dependencies
 less = require 'less'
 fs = require 'fs'
 path = require 'path'
 Asset = require('../asset').Asset
 
+# asset
 class exports.LessAsset extends Asset
   ext: 'css'
   name: 'less'
