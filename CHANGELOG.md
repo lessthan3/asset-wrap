@@ -1,3 +1,9 @@
+**v0.5.2** (2014-02-01)
+
+ - allow for custom code to be passed into stylus module
+ - watch out for unexpected errors in tests
+ - update to should 3.1.x
+
 **v0.5.1** (2014-02-01)
 
  - add a CSS module

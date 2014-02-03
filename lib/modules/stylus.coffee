@@ -13,10 +13,16 @@ class exports.StylusAsset extends Asset
   name: 'stylus'
   type: 'text/css'
   compile: ->
+    source = @config.source
     compress = @config.compress or false
     paths = @config.paths or []
 
-    fs.readFile @src, 'utf8', (err, data) =>
+    read = (next) =>
+      # optionally pass in the source to avoid reading from disk
+      return next null, source if source
+      fs.readFile @src, 'utf8', next
+
+    read (err, data) =>
       return @emit 'error', err if err?
       options =
         filename: @src
