@@ -74,10 +74,11 @@ Options are the exact same as an asset. Any options given here are passed
 down to each asset.
 
 ## Asset Types
-* SnocketsAsset
+* CSSAsset
 * LessAsset
-* StylusAsset
 * SassAsset
+* SnocketsAsset
+* StylusAsset
 
 
 ## Examples
