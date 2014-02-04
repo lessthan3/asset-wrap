@@ -11,6 +11,7 @@ asset = new wrap.Snockets {
   src: 'assets/hello.coffee'
   compress: true
   cdn: cdn
+  dst: 'assets/test.js'
 }, (err) ->
   throw err if err
   console.log asset.url

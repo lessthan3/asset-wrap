@@ -1,3 +1,8 @@
+**v0.6.0** (2014-02-03)
+
+ - remove pkgcloud dependency (it is 5MB)
+ - cdn push still available, but user must install pkgcloud on their own
+
 **v0.5.2** (2014-02-01)
 
  - allow for custom code to be passed into stylus module
