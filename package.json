@@ -22,7 +22,7 @@
     "node-uuid": "1.4.x",
     "sass": "0.5.x",
     "snockets": "1.3.x",
-    "stylus": "0.40.x"
+    "stylus": "0.42.x"
   },
   "devDependencies": {
     "express": "3.4.x",
