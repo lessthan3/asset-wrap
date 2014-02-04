@@ -2,6 +2,8 @@
 
  - remove pkgcloud dependency (it is 5MB)
  - cdn push still available, but user must install pkgcloud on their own
+ - bump stylus to 0.42.x
+ - bump chokidar to 0.8.x for better file watching on OS X
 
 **v0.5.2** (2014-02-01)
 
