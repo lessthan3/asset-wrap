@@ -1,3 +1,10 @@
+**v0.7.0** (2014-03-11)
+
+ - allow config.source input on more modules
+ - add a .coffee module
+ - add a preprocess function when possible to modify input code
+ - add a postprocess function when possible to modify output code
+
 **v0.6.0** (2014-02-03)
 
  - remove pkgcloud dependency (it is 5MB)
