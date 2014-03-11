@@ -11,12 +11,30 @@ class exports.CSSAsset extends Asset
   name: 'css'
   type: 'text/css'
   compile: ->
-    fs.readFile @src, 'utf8', (err, css) =>
-      return @emit 'error', err if err?
 
-      if @config.cleancss or @config.compress or @config.minify
-        css = new CleanCSS({}).minify css
+    # defaults
+    @config.minify = @config.minify or @config.compress or @config.cleancss
 
-      @data = css
+    # read source
+    @read (err, source) =>
+      return @emit 'error', err if err
+
+      # pre-process
+      if @config.preprocess
+        source = @config.preprocess
+
+      # compile
+      result = source
+
+      # post-process
+      if @config.postprocess
+        result = @config.postprocess result
+
+      # minify
+      if @config.minify
+        result = new CleanCSS({}).minify result
+
+      # complete
+      @data = result
       @emit 'compiled'
 

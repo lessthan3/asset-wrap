@@ -13,33 +13,45 @@ class exports.StylusAsset extends Asset
   name: 'stylus'
   type: 'text/css'
   compile: ->
-    source = @config.source
-    compress = @config.compress or false
-    paths = @config.paths or []
 
-    read = (next) =>
-      # optionally pass in the source to avoid reading from disk
-      return next null, source if source
-      fs.readFile @src, 'utf8', next
+    # defaults
+    @config.paths ?= []
+    @config.compress = @config.compress or @config.minify
 
-    read (err, data) =>
-      return @emit 'error', err if err?
-      options =
+    # read source
+    @read (err, source) =>
+      return @emit 'error', err if err
+
+      # pre-process
+      if @config.preprocess
+        source = @config.preprocess source
+
+      # compile, minify
+      s = stylus(source, {
         filename: @src
-        paths: paths.concat [path.dirname @src]
-      s = stylus(data, options)
-        .use(nib())
+        paths: @config.paths.concat [path.dirname @src]
+      }).use(nib())
         .define('url', stylus.url())
-        .set('compress', compress)
+        .set('compress', @config.compress)
         .set('include css', true)
       @parseVariables s, @config.vars, @config.vars_prefix
-      s.render (err, css) =>
-          return @emit 'error', err if err?
-          if @config.cleancss
-            css = new CleanCSS({}).minify css
-          @data = css
-          @emit 'compiled'
+      s.render (err, result) =>
+        return @emit 'error', err if err
 
+        # post-process
+        if @config.postprocess
+          result = @config.postprocess result
+
+        # cleancss
+        if @config.cleancss
+          result = new CleanCSS({}).minify result
+
+        # complete
+        @data = result
+        @emit 'compiled'
+
+  # parse variables to enforce using proper stylus nodes
+  # otherwise all variables end up as strings in the styl file
   parseVariables: (s, vars, vars_prefix="") ->
     parseColors = (colors) ->
       parse = (hex) ->

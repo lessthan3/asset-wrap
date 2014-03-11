@@ -12,7 +12,22 @@ class exports.SassAsset extends Asset
   name: 'sass'
   type: 'text/css'
   compile: ->
-    fs.readFile @src, 'utf8', (err, data) =>
-      return @emit 'error', err if err?
-      @data = sass.render data
+
+    # read source
+    @read (err, source) =>
+      return @emit 'error', err if err
+
+      # pre-process
+      if @config.preprocess
+        source = @config.preprocess source
+
+      # compile
+      result = sass.render source
+
+      # post-process
+      if @config.postprocess
+        result = @config.postprocess result
+
+      # complete
+      @data = result
       @emit 'compiled'

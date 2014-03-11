@@ -13,14 +13,27 @@ class exports.SnocketsAsset extends Asset
   constructor: (@config, callback) ->
     super @config, callback
     @snockets = new Snockets()
+
   compile: ->
+
+    # defaults
+    @config.minify = @config.minify or @config.compress
+
+    # read source, compile, minify
     @snockets.getConcatenation @src, {
       async: false
-      minify: @config.compress or false
-    }, (err, js) =>
+      minify: @config.minify
+    }, (err, result) =>
       return @emit 'error', err if err?
-      @data = js
+      
+      # post-process
+      if @config.postprocess
+        result = @config.postprocess result
+
+      # complete
+      @data = result
       @emit 'compiled'
+
   watch: ->
     @snockets.scan @src, (err, graph) =>
       for file in graph.getChain @src

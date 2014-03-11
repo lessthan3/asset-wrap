@@ -11,19 +11,38 @@ class exports.LessAsset extends Asset
   name: 'less'
   type: 'text/css'
   compile: ->
-    compress = @config.compress or false
-    paths = @config.paths or []
 
-    fs.readFile @src, 'utf8', (err, data) =>
-      return @emit 'error', err if err?
+    # defaults
+    @config.paths ?= []
+
+    # read source
+    @read (err, source) =>
+      return @emit 'error', err if err
+
+      # pre-process
+      if @config.preprocess
+        source = @config.preprocess source
+
+      # compile
       parser = new less.Parser
         optimization: 0
         silent: true
         color: true
         filename: @src
-        paths: paths.concat [path.dirname @src]
-      parser.parse data, (err, tree) =>
+        paths: @config.paths.concat [path.dirname @src]
+      parser.parse source, (err, tree) =>
         return @emit 'error', err if err?
-        @data = tree.toCSS compress: compress
+
+        # minify
+        result = tree.toCSS {
+          compress: @config.compress or @config.minify
+        }
+
+        # post-process
+        if @config.postprocess
+          result = @config.postprocess result
+
+        # complete
+        @data = result
         @emit 'compiled'
 
