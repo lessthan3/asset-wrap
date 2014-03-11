@@ -2,6 +2,7 @@
 # dependencies
 chokidar = require 'chokidar'
 crypto = require 'crypto'
+fs = require 'fs'
 path = require 'path'
 utils = require './utils'
 EventEmitter = require('events').EventEmitter
@@ -57,7 +58,6 @@ class exports.Asset extends EventEmitter
 
   # push this asset to a cdn
   push: (config, next) ->
-    console.log 'push'
     try
       pkgcloud = require 'pkgcloud'
       client = pkgcloud.storage.createClient config
@@ -72,8 +72,13 @@ class exports.Asset extends EventEmitter
           @updateTag()
           next()
     catch err
-      console.log 'error'
       @emit 'error', 'must have pkgcloud installed'
+
+  read: (next) ->
+    if @config.source
+      next null, @config.source
+    else
+      fs.readFile @src, 'utf8', next
 
   updateTag: ->
     switch @type
