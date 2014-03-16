@@ -24,11 +24,16 @@ class exports.SnocketsAsset extends Asset
       async: false
       minify: @config.minify
     }, (err, result) =>
-      return @emit 'error', err if err?
+      return @emit 'error', err if err
       
-      # post-process
-      if @config.postprocess
-        result = @config.postprocess result
+      try
+
+        # post-process
+        if @config.postprocess
+          result = @config.postprocess result
+
+      catch err
+        return @emit 'error', err if err
 
       # complete
       @data = result

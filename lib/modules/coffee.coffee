@@ -20,23 +20,28 @@ class exports.CoffeeAsset extends Asset
     @read (err, source) =>
       return @emit 'error', err if err
       
-      # pre-process
-      if @config.preprocess
-        source = @config.preprocess source
+      try
 
-      # compile
-      result = coffee.compile source
+        # pre-process
+        if @config.preprocess
+          source = @config.preprocess source
 
-      # post-process
-      if @config.postprocess
-        result = @config.postprocess result
+        # compile
+        result = coffee.compile source
 
-      # minify
-      if @config.minify
-        result = UglifyJS.minify(result, {
-          fromString: true
-          mangle: true
-        }).code
+        # post-process
+        if @config.postprocess
+          result = @config.postprocess result
+
+        # minify
+        if @config.minify
+          result = UglifyJS.minify(result, {
+            fromString: true
+            mangle: true
+          }).code
+
+      catch err
+        return @emit 'error', err if err
 
       # complete
       @data = result

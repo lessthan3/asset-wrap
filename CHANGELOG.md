@@ -1,3 +1,7 @@
+**v0.7.1** (2014-03-16)
+
+ - add in try catches for any code that could possibly crash
+
 **v0.7.0** (2014-03-11)
 
  - allow config.source input on more modules

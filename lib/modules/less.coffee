@@ -19,28 +19,40 @@ class exports.LessAsset extends Asset
     @read (err, source) =>
       return @emit 'error', err if err
 
-      # pre-process
-      if @config.preprocess
-        source = @config.preprocess source
+      try
 
-      # compile
-      parser = new less.Parser
-        optimization: 0
-        silent: true
-        color: true
-        filename: @src
-        paths: @config.paths.concat [path.dirname @src]
+        # pre-process
+        if @config.preprocess
+          source = @config.preprocess source
+
+        # compile
+        parser = new less.Parser {
+          optimization: 0
+          silent: true
+          color: true
+          filename: @src
+          paths: @config.paths.concat [path.dirname @src]
+        }
+
+      catch err
+        return @emit 'error', err if err
+
       parser.parse source, (err, tree) =>
         return @emit 'error', err if err?
 
-        # minify
-        result = tree.toCSS {
-          compress: @config.compress or @config.minify
-        }
+        try
 
-        # post-process
-        if @config.postprocess
-          result = @config.postprocess result
+          # minify
+          result = tree.toCSS {
+            compress: @config.compress or @config.minify
+          }
+
+          # post-process
+          if @config.postprocess
+            result = @config.postprocess result
+
+        catch err
+          return @emit 'error', err if err
 
         # complete
         @data = result

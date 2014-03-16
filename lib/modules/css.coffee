@@ -19,20 +19,25 @@ class exports.CSSAsset extends Asset
     @read (err, source) =>
       return @emit 'error', err if err
 
-      # pre-process
-      if @config.preprocess
-        source = @config.preprocess
+      try
 
-      # compile
-      result = source
+        # pre-process
+        if @config.preprocess
+          source = @config.preprocess
 
-      # post-process
-      if @config.postprocess
-        result = @config.postprocess result
+        # compile
+        result = source
 
-      # minify
-      if @config.minify
-        result = new CleanCSS({}).minify result
+        # post-process
+        if @config.postprocess
+          result = @config.postprocess result
+
+        # minify
+        if @config.minify
+          result = new CleanCSS({}).minify result
+
+      catch err
+        return @emit 'error', err if err
 
       # complete
       @data = result

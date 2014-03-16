@@ -22,29 +22,40 @@ class exports.StylusAsset extends Asset
     @read (err, source) =>
       return @emit 'error', err if err
 
-      # pre-process
-      if @config.preprocess
-        source = @config.preprocess source
+      try
 
-      # compile, minify
-      s = stylus(source, {
-        filename: @src
-        paths: @config.paths.concat [path.dirname @src]
-      }).use(nib())
-        .define('url', stylus.url())
-        .set('compress', @config.compress)
-        .set('include css', true)
-      @parseVariables s, @config.vars, @config.vars_prefix
+        # pre-process
+        if @config.preprocess
+          source = @config.preprocess source
+
+        # compile, minify
+        s = stylus(source, {
+          filename: @src
+          paths: @config.paths.concat [path.dirname @src]
+        }).use(nib())
+          .define('url', stylus.url())
+          .set('compress', @config.compress)
+          .set('include css', true)
+        @parseVariables s, @config.vars, @config.vars_prefix
+
+      catch err
+        return @emit 'error', err if err
+
       s.render (err, result) =>
         return @emit 'error', err if err
 
-        # post-process
-        if @config.postprocess
-          result = @config.postprocess result
+        try
 
-        # cleancss
-        if @config.cleancss
-          result = new CleanCSS({}).minify result
+          # post-process
+          if @config.postprocess
+            result = @config.postprocess result
+
+          # cleancss
+          if @config.cleancss
+            result = new CleanCSS({}).minify result
+
+        catch err
+          return @emit 'err', err if err
 
         # complete
         @data = result
