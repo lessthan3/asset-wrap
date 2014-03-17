@@ -41,16 +41,16 @@ class exports.Assets extends EventEmitter
         if @options.ignoreErrors
           next()
         else
-          @emit 'error', err
+          @emit 'error', "#{asset.src}\n\n#{err.stack}"
       asset.wrap()
     , (err) =>
-      return @emit 'error', err if err?
+      return @emit 'error', err if err
       @emit 'complete'
 
   # add a middleware hook to serve assets from
   middleware: (req, res, next) =>
     asset = @urls[req.url]
-    return next() unless asset?
+    return next() unless asset
     res.set 'Cache-Control', asset.cache
     res.set 'Content-Type', asset.type
     res.send asset.data

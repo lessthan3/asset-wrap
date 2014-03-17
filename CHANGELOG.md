@@ -1,3 +1,7 @@
+**0.7.2** (2014-03-16)
+
+ - better error message for failed compile
+
 **v0.7.1** (2014-03-16)
 
  - add in try catches for any code that could possibly crash
