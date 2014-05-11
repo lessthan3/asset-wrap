@@ -1,3 +1,9 @@
+
+**0.8.0** (2014-05-11)
+
+ - move back from uglify-js2 to uglifyjs
+ - update uglify js from 2.1.x to 2.4.x
+
 **0.7.2** (2014-03-16)
 
  - better error message for failed compile
