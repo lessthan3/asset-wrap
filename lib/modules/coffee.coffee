@@ -4,7 +4,7 @@ coffee = require 'coffee-script'
 fs = require 'fs'
 path = require 'path'
 Asset = require('../asset').Asset
-UglifyJS = require 'uglify-js2'
+UglifyJS = require 'uglify-js'
 
 # asset
 class exports.CoffeeAsset extends Asset
