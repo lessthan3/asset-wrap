@@ -1,3 +1,6 @@
+**0.8.1** (2014-06-02)
+
+ - critical fix for Assets.wrap. only emit one error
 
 **0.8.0** (2014-05-11)
 
