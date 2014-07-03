@@ -1,3 +1,7 @@
+**0.8.2** (2014-07-03)
+
+ - update coffee-script from 1.4.x to 1.7.x
+
 **0.8.1** (2014-06-02)
 
  - critical fix for Assets.wrap. only emit one error
