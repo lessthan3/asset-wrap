@@ -102,8 +102,8 @@ class exports.StylusAsset extends Asset
         s.define k, parseColors rgba[1..4]
 
       # integer
-      else if /[0-9]+/.test v
-        s.define k, new stylus.nodes.Unit v
+      else if /^[0-9]+$/.test v
+        s.define k, new stylus.nodes.Unit parseInt v, 10
 
       # literal
       else

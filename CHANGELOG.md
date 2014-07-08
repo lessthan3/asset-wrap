@@ -1,3 +1,7 @@
+**0.8.5** (2014-07-07)
+
+ - stylus units value must be an integer
+
 **0.8.4** (2014-07-07)
 
  - handle incoming stylus integers as Units
