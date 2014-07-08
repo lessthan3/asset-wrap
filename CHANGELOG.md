@@ -1,3 +1,7 @@
+**0.8.4** (2014-07-07)
+
+ - handle incoming stylus integers as Units
+
 **0.8.3** (2014-07-07)
 
  - fix error reporting
