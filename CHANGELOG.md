@@ -1,3 +1,7 @@
+**0.8.3** (2014-07-07)
+
+ - fix error reporting
+
 **0.8.2** (2014-07-03)
 
  - update coffee-script from 1.4.x to 1.7.x

@@ -41,7 +41,7 @@ class exports.Assets extends EventEmitter
         if @options.ignoreErrors
           next()
         else
-          next 'error', "#{asset.src}\n\n#{err.stack}"
+          next "#{asset.src}\n\n#{err.stack}"
       asset.wrap()
     , (err) =>
       return @emit 'error', err if err
