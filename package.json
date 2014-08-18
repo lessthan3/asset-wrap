@@ -1,7 +1,7 @@
 {
   "name": "asset-wrap",
   "description": "Asset management framework for nodejs",
-  "version": "0.9.1",
+  "version": "0.9.2,
   "author": "Bryant Williams <b.n.williams@gmail.com>",
   "repository": {
     "type": "git",
