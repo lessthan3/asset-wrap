@@ -1,3 +1,7 @@
+**v0.9.2** (2014-08-17)
+
+ - add engines to package.json, only support >= 0.8.0
+
 **v0.9.1** (2014-08-17)
 
  - allow Asset to be used directly as a file reader

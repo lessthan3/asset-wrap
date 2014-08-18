@@ -31,5 +31,8 @@
     "pkgcloud": "0.9.x",
     "should": "4.0.x"
   },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
   "main": "./lib/index"
 }
