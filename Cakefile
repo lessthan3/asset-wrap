@@ -4,7 +4,7 @@ log = console.log
 task 'test', ->
   run 'NODE_ENV=test
     ./node_modules/mocha/bin/mocha
-    --compilers coffee:coffee-script
+    --compilers coffee:coffee-script/register
     --reporter min
     --require should
     --colors

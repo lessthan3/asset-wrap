@@ -1,29 +1,34 @@
-**0.8.5** (2014-07-07)
+**v0.9.0** (2014-08-17)
+
+ - add source map generation to coffee compiler
+ - upgrade tests to use coffee-script 1.7.x
+
+**v0.8.5** (2014-07-07)
 
  - stylus units value must be an integer
 
-**0.8.4** (2014-07-07)
+**v0.8.4** (2014-07-07)
 
  - handle incoming stylus integers as Units
 
-**0.8.3** (2014-07-07)
+**v0.8.3** (2014-07-07)
 
  - fix error reporting
 
-**0.8.2** (2014-07-03)
+**v0.8.2** (2014-07-03)
 
  - update coffee-script from 1.4.x to 1.7.x
 
-**0.8.1** (2014-06-02)
+**v0.8.1** (2014-06-02)
 
  - critical fix for Assets.wrap. only emit one error
 
-**0.8.0** (2014-05-11)
+**v0.8.0** (2014-05-11)
 
  - move back from uglify-js2 to uglifyjs
  - update uglify js from 2.1.x to 2.4.x
 
-**0.7.2** (2014-03-16)
+**v0.7.2** (2014-03-16)
 
  - better error message for failed compile
 

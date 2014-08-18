@@ -27,7 +27,15 @@ class exports.CoffeeAsset extends Asset
           source = @config.preprocess source
 
         # compile
-        result = coffee.compile source
+        if @config.source_map
+          {js, sourceMap, v3SourceMap} = coffee.compile source, {
+            sourceMap: true
+          }
+          @source_map = sourceMap
+          @v3_source_map = v3SourceMap
+          result = js
+        else
+          result = coffee.compile source
 
         # post-process
         if @config.postprocess
