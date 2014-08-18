@@ -1,6 +1,7 @@
 **v0.9.1** (2014-08-17)
 
  - allow Asset to be used directly as a file reader
+ - add generated files and source file parameters to coffee source maps
 
 **v0.9.0** (2014-08-17)
 

@@ -30,6 +30,8 @@ class exports.CoffeeAsset extends Asset
         if @config.source_map
           {js, sourceMap, v3SourceMap} = coffee.compile source, {
             sourceMap: true
+            sourceFiles: @config.source_files
+            generatedFile: @config.generated_file
           }
           @source_map = sourceMap
           @v3_source_map = v3SourceMap
