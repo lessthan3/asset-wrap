@@ -1,3 +1,7 @@
+**v0.9.3** (2014-08-17)
+
+ - tell travis not to test with node 0.6.x
+
 **v0.9.2** (2014-08-17)
 
  - add engines to package.json, only support >= 0.8.0
