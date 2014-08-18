@@ -1,3 +1,7 @@
+**v0.9.1** (2014-08-17)
+
+ - allow Asset to be used directly as a file reader
+
 **v0.9.0** (2014-08-17)
 
  - add source map generation to coffee compiler

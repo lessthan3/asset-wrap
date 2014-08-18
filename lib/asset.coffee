@@ -54,7 +54,9 @@ class exports.Asset extends EventEmitter
 
   # compile this asset
   compile: ->
-    throw new Error 'override me!'
+    @read (err, source) =>
+      @data = source
+      @emit 'compiled'
 
   # push this asset to a cdn
   push: (config, next) ->
