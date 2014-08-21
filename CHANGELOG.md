@@ -1,3 +1,7 @@
+**v0.9.4** (2104-08-21)
+
+ - allow preprocess and postprocess on generic asset
+
 **v0.9.3** (2014-08-17)
 
  - tell travis not to test with node 0.6.x
