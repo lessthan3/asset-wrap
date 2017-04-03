@@ -1,11 +1,11 @@
 {
-  "name": "asset-wrap",
+  "name": "dobi-asset-wrap",
   "description": "Asset management framework for nodejs",
-  "version": "0.9.4",
-  "author": "Bryant Williams <b.n.williams@gmail.com>",
+  "version": "1.00.0",
+  "author": "Maestro.io <dev@maestro.io>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/scien/asset-wrap.git"
+    "url": "git://github.com/lessthan3/asset-wrap.git"
   },
   "scripts": {
     "start":    "cake start",
