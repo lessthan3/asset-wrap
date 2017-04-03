@@ -31,7 +31,7 @@ class exports.Asset extends EventEmitter
 
   # events
   onCompiled: =>
-    
+
     # set url
     @md5 = crypto.createHash('md5').update(@data).digest 'hex'
     @url = "#{@dst[0...@dst.length-path.extname(@dst).length]}-#{@md5}.#{@ext}"

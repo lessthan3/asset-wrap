@@ -18,7 +18,7 @@ run = (args...) ->
         if a instanceof Array then params = a
         else options = a
       when 'function' then callback = a
-  
+
   command += ' ' + params.join ' ' if params?
   cmd = spawn '/bin/sh', ['-c', command], options
   cmd.stdout.on 'data', (data) -> process.stdout.write data

@@ -60,7 +60,7 @@ describe 'Stylus', ->
     asset = new wrap.Stylus {
       src: "#{__dirname}/assets/not-a-file.styl"
     }, (err) ->
-      err.errno.should.equal 34
+      err.errno.should.equal -2
       done()
 
   it 'should allow both types of imports', (done) ->
@@ -91,5 +91,5 @@ describe 'Stylus', ->
       asset.md5.should.equal '0029a617f994665fa8172b68ba6d0838'
       done()
 
-    
+
 
