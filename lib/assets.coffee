@@ -1,7 +1,7 @@
 
 # dependencies
 async = require 'async'
-uuid = require 'node-uuid'
+uuid = require 'uuid'
 Asset = require('./asset').Asset
 EventEmitter = require('events').EventEmitter
 
@@ -20,7 +20,7 @@ class exports.Assets extends EventEmitter
     for asset in @assets
       for k, v of @options
         asset.config[k] ?= v
-      
+
     @dsts = {}
     @urls = {}
     if callback
