@@ -1,7 +1,7 @@
 {
   "name": "asset-wrap",
   "description": "Asset management framework for nodejs",
-  "version": "0.8.0",
+  "version": "0.9.4",
   "author": "Bryant Williams <b.n.williams@gmail.com>",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "async": "0.2.x",
     "clean-css": "2.0.x",
     "chokidar": "0.8.x",
-    "coffee-script":  "1.4.x",
+    "coffee-script":  "1.7.x",
     "less": "1.3.x",
     "nib": "1.0.x",
     "node-uuid": "1.4.x",
@@ -27,10 +27,12 @@
   },
   "devDependencies": {
     "express": "3.4.x",
-    "mocha": "1.8.x",
-    "pkgcloud": "0.8.x",
-    "should": "3.1.x",
-    "zappajs": "0.4.x"
+    "mocha": "1.21.x",
+    "pkgcloud": "0.9.x",
+    "should": "4.0.x"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
   },
   "main": "./lib/index"
 }

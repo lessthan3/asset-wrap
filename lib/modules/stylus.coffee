@@ -101,6 +101,10 @@ class exports.StylusAsset extends Asset
         rgba = v.match /^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
         s.define k, parseColors rgba[1..4]
 
+      # integer
+      else if /^[0-9]+$/.test v
+        s.define k, new stylus.nodes.Unit parseInt v, 10
+
       # literal
       else
         s.define k, new stylus.nodes.Literal v

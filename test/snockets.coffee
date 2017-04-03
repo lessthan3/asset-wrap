@@ -9,7 +9,7 @@ describe 'Snockets', ->
     asset.on 'error', (err) ->
       throw err
     asset.on 'complete', ->
-      asset.md5.should.equal 'b01b34326cd38ea077632ab9b98a911a'
+      asset.md5.should.equal 'fe2984bb8ff29d0fd26a598b090f465b'
       done()
     asset.wrap()
 
@@ -18,7 +18,7 @@ describe 'Snockets', ->
       src: "#{__dirname}/assets/hello.coffee"
     }, (err) ->
       throw err if err
-      asset.md5.should.equal 'b01b34326cd38ea077632ab9b98a911a'
+      asset.md5.should.equal 'fe2984bb8ff29d0fd26a598b090f465b'
       done()
 
   it 'should wrap on callback', (done) ->
@@ -26,7 +26,7 @@ describe 'Snockets', ->
       src: "#{__dirname}/assets/hello.coffee"
     }, (err) ->
       throw err if err
-      asset.md5.should.equal 'b01b34326cd38ea077632ab9b98a911a'
+      asset.md5.should.equal 'fe2984bb8ff29d0fd26a598b090f465b'
       done()
 
   it 'should be able to compress', (done) ->

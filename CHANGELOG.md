@@ -1,10 +1,51 @@
+**v0.9.4** (2104-08-21)
 
-**0.8.0** (2014-05-11)
+ - allow preprocess and postprocess on generic asset
+
+**v0.9.3** (2014-08-17)
+
+ - tell travis not to test with node 0.6.x
+
+**v0.9.2** (2014-08-17)
+
+ - add engines to package.json, only support >= 0.8.0
+
+**v0.9.1** (2014-08-17)
+
+ - allow Asset to be used directly as a file reader
+ - add generated files and source file parameters to coffee source maps
+
+**v0.9.0** (2014-08-17)
+
+ - add source map generation to coffee compiler
+ - upgrade tests to use coffee-script 1.7.x
+
+**v0.8.5** (2014-07-07)
+
+ - stylus units value must be an integer
+
+**v0.8.4** (2014-07-07)
+
+ - handle incoming stylus integers as Units
+
+**v0.8.3** (2014-07-07)
+
+ - fix error reporting
+
+**v0.8.2** (2014-07-03)
+
+ - update coffee-script from 1.4.x to 1.7.x
+
+**v0.8.1** (2014-06-02)
+
+ - critical fix for Assets.wrap. only emit one error
+
+**v0.8.0** (2014-05-11)
 
  - move back from uglify-js2 to uglifyjs
  - update uglify js from 2.1.x to 2.4.x
 
-**0.7.2** (2014-03-16)
+**v0.7.2** (2014-03-16)
 
  - better error message for failed compile
 
