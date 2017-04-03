@@ -54,7 +54,24 @@ class exports.Asset extends EventEmitter
 
   # compile this asset
   compile: ->
-    throw new Error 'override me!'
+
+    # read source
+    @read (err, source) =>
+
+      # pre-process
+      if @config.preprocess
+        source = @config.preprocess source
+
+      # nothing to compile
+      result = source
+
+      # post-process
+      if @config.postprocess
+        result = @config.postprocess result
+
+      # done
+      @data = result
+      @emit 'compiled'
 
   # push this asset to a cdn
   push: (config, next) ->
