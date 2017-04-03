@@ -26,10 +26,10 @@
     "uuid": "3.0.1"
   },
   "devDependencies": {
-  "express": "3.4.x",
-  "mocha": "1.21.x",
-  "pkgcloud": "0.9.x",
-  "should": "4.0.x"
+    "express": "3.4.x",
+    "mocha": "1.21.x",
+    "pkgcloud": "0.9.x",
+    "should": "4.0.x"
   },
   "engines": {
     "node": ">= 6.10.0"
