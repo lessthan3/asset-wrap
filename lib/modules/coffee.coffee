@@ -45,10 +45,11 @@ class exports.CoffeeAsset extends Asset
 
         # minify
         if @config.minify
-          result = UglifyJS.minify(result, {
-            fromString: true
+          {code, error} = UglifyJS.minify(result, {
             mangle: true
-          }).code
+          })
+          throw error if error
+          code
 
       catch err
         return @emit 'error', err if err

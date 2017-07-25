@@ -1,6 +1,6 @@
 #hello {
-  color red
+  color: red;
 }
 #hello .world {
-  color blue
+  color: blue;
 }

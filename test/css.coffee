@@ -9,7 +9,7 @@ describe 'CSS', ->
     asset.on 'error', (err) ->
       throw err
     asset.on 'complete', ->
-      asset.md5.should.equal '1c2300e780af0bf95dcd7b5afc9e6453'
+      asset.md5.should.equal '3c130f32f774c4edf102c339d0439df0'
       done()
     asset.wrap()
 
@@ -18,7 +18,7 @@ describe 'CSS', ->
       src: "#{__dirname}/assets/hello.css"
     }, (err) ->
       throw err if err
-      asset.md5.should.equal '1c2300e780af0bf95dcd7b5afc9e6453'
+      asset.md5.should.equal '3c130f32f774c4edf102c339d0439df0'
       done()
 
   it 'should minify correctly', (done) ->
@@ -27,6 +27,6 @@ describe 'CSS', ->
       minify: true
     }, (err) ->
       throw err if err
-      asset.md5.should.equal 'f5574ce2f208cbd2827ee32f4dbe349a'
+      asset.md5.should.equal 'b53eac41377b9ee809fd1c83e903017b'
       done()
 

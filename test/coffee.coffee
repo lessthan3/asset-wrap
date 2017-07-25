@@ -35,7 +35,7 @@ describe 'Coffee', ->
       compress: true
     }, (err) ->
       throw err if err
-      asset.md5.should.equal '323da5a76efc1215d09491ba7d40129c'
+      asset.md5.should.equal 'fe2984bb8ff29d0fd26a598b090f465b'
       done()
 
   it 'should be able to generate source maps', (done) ->

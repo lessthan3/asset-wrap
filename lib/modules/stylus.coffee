@@ -52,7 +52,13 @@ class exports.StylusAsset extends Asset
 
           # cleancss
           if @config.cleancss
-            result = new CleanCSS({}).minify result
+            {styles, errors, warnings} = new CleanCSS({}).minify result
+            result = styles
+            if errors.length or warnings.length
+              # CleanCSS seems to surface some critical errors (i.e. invalid
+              # CSS syntax) as warnings, so we should treat them as errors.
+              message = errors[0] or warnings[0]
+              throw new Error message
 
         catch err
           return @emit 'err', err if err

@@ -34,7 +34,14 @@ class exports.CSSAsset extends Asset
 
         # minify
         if @config.minify
-          result = new CleanCSS({}).minify result
+          {styles, errors, warnings} = new CleanCSS({}).minify result
+          result = styles
+          if errors.length or warnings.length
+            # CleanCSS seems to surface some critical errors (i.e. invalid
+            # CSS syntax) as warnings, so we should treat them as errors.
+            message = errors[0] or warnings[0]
+            throw new Error message
+          result
 
       catch err
         return @emit 'error', err if err
